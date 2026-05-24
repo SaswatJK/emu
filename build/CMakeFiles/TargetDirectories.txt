@@ -1,3 +1,0 @@
-/home/saswatjk/c_programming/emu/build/CMakeFiles/emu.dir
-/home/saswatjk/c_programming/emu/build/CMakeFiles/edit_cache.dir
-/home/saswatjk/c_programming/emu/build/CMakeFiles/rebuild_cache.dir

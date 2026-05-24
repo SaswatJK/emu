@@ -1,1 +1,0 @@
-/usr/bin/gcc CMakeFiles/emulator.dir/main.c.o CMakeFiles/emulator.dir/source/arena.c.o -o emulator  -lm 
