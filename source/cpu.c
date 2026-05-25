@@ -117,8 +117,11 @@ word AM_POSTIDNEXED_INDIRECT(CPU* cpu, _Bool PAGE_CROSS){
 }
 
 void Step(CPU* cpu){
-    PrintCPUState(cpu);
+    #ifdef DEBUG
+        PrintCPUState(cpu);
+    #endif
     byte OPCODE = cpu->bus->mem[cpu->PC++];
+    //fprintf(stderr, "OPCODE: %x\n", OPCODE);
     switch(OPCODE){
         case 0x00: {
             BRK(cpu); cpu->cycles += 7; break; }
@@ -579,7 +582,7 @@ void TXS(CPU* cpu){
 }
 
 void TSX(CPU* cpu){
-    cpu->SP = cpu->X;
+    cpu->X = cpu->SP;
     SetNZFlags(cpu, cpu->SP);
 }
 
@@ -773,12 +776,12 @@ void PLA(CPU* cpu){
 }
 
 void PHP(CPU* cpu){
-    cpu->bus->mem[0x0100 | (word)cpu->SP] = cpu->SR;
+    cpu->bus->mem[0x0100 | (word)cpu->SP] = cpu->SR | 0x30;
     cpu->SP--;
 
 }
 void PLP(CPU* cpu){
-    cpu->SR = cpu->bus->mem[0x0100 | (word)++cpu->SP];
+    cpu->SR = (cpu->bus->mem[0x0100 | (word)++cpu->SP] | FB_IGNORED) & ~FB_B;
 }
 
 void JSR(CPU* cpu, word address){
@@ -810,9 +813,10 @@ void ADC(CPU* cpu, byte data){
         cpu->SR |= FB_V;
     else
         cpu->SR &= ~FB_V;
-    if(result > 0xFF){
+    if(result > 0xFF)
         SEC(cpu);
-    }
+    else
+        CLC(cpu);
     cpu->A = (byte)result;
     SetNZFlags(cpu, cpu->A);
 }
