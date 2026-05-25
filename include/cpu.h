@@ -40,7 +40,7 @@ typedef struct{
     byte X; // X and Y are index registers whose content is added to the base memory location, before any values are either stored to or retreived from the "result address".
     byte Y;
     byte SR; // Status register, or also a P register.
-    byte SP; // Stack pointer.
+    byte SP; // Stack pointer, always the low byte of the first page.
 }CPU;
 
 BUS CreateMemory();
@@ -61,5 +61,54 @@ void TYA(CPU* cpu);
 void JMP(CPU* cpu, word address);
 void BEQ(CPU* cpu, i8 relAddr);
 void BNE(CPU* cpu, i8 relAddr);
+void CLC(CPU* cpu);
+void SEC(CPU* cpu);
+void CLD(CPU* cpu);
+void SED(CPU* cpu);
+void CLI(CPU* cpu);
+void SEI(CPU* cpu);
+void CLV(CPU* cpu);
+void INX(CPU* cpu);
+void INY(CPU* cpu);
+void DEX(CPU* cpu);
+void DEY(CPU* cpu);
+void INC(CPU* cpu, word address);
+void DEC(CPU* cpu, word address);
+void AND(CPU* cpu, byte data);
+void ORA(CPU* cpu, byte data);
+void EOR(CPU* cpu, byte data);
+void CMP(CPU* cpu, byte data);
+void CPX(CPU* cpu, byte data);
+void CPY(CPU* cpu, byte data);
+void ASL_ACC(CPU* cpu);
+void ASL_MEM(CPU* cpu, word address);
+void LSR_ACC(CPU* cpu);
+void LSR_MEM(CPU* cpu, word address);
+void ROL_ACC(CPU* cpu);
+void ROL_MEM(CPU* cpu, word address);
+void ROR_ACC(CPU* cpu);
+void ROR_MEM(CPU* cpu, word address);
+void PHA(CPU* cpu);
+void PLA(CPU* cpu);
+void PHP(CPU* cpu);
+void PLP(CPU* cpu);
+void TSX(CPU* cpu);
+void TXS(CPU* cpu);
+void JSR(CPU* cpu, word address);
+void RTS(CPU* cpu);
+void RTI(CPU* cpu);
+void BRK(CPU* cpu);
+void ADC(CPU* cpu, byte data);
+void SBC(CPU* cpu, byte data);
+void BIT(CPU* cpu, byte data);
+void BCC(CPU* cpu, i8 relAddr);
+void BCS(CPU* cpu, i8 relAddr);
+void BMI(CPU* cpu, i8 relAddr);
+void BPL(CPU* cpu, i8 relAddr);
+void BVC(CPU* cpu, i8 relAddr);
+void BVS(CPU* cpu, i8 relAddr);
+void STX(CPU* cpu, word address);
+void STY(CPU* cpu, word address);
+void NOP(CPU* cpu);
 
 #endif
