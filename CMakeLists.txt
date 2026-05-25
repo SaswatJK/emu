@@ -16,3 +16,13 @@ target_include_directories(emu PRIVATE
 target_link_libraries(emu PRIVATE
                                 m
 )
+
+target_compile_options(emu PRIVATE
+    $<$<CONFIG:Release>:-O2>
+    $<$<CONFIG:Debug>:-O0 -g>
+)
+
+target_compile_definitions(emu PRIVATE
+    $<$<CONFIG:Release>:NDEBUG>
+    $<$<CONFIG:Debug>:DEBUG>
+)
