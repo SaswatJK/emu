@@ -799,7 +799,7 @@ void RTS(CPU* cpu){
 
 void RTI(CPU* cpu){
     PLP(cpu);
-    cpu->SR &= ~FB_B; 
+    cpu->SR &= ~FB_B;
     byte retLo = cpu->bus->mem[0x0100 | (word)++cpu->SP];
     byte retHi = cpu->bus->mem[0x0100 | (word)++cpu->SP];
     cpu->PC = (((word)retHi << 8) | retLo);

@@ -22,7 +22,6 @@ int main(){
     fclose(f);
     RAMBus.mem[0xFFFC] = 0x00;
     RAMBus.mem[0xFFFD] = 0x04;
-    RAMBus.mem[0x0000] = 0x01; // 6502 doesn't have BCD mode afaik.
     CPU cpu = Reset(&RAMBus);
     while(1){
         word oldPC = cpu.PC;
